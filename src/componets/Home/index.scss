@@ -1,0 +1,17 @@
+.home {
+  //   justify-content: center;
+
+  &-chart {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &-resumen {
+    text-align: center;
+  }
+  &-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
