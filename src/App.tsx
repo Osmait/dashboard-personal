@@ -6,23 +6,26 @@ import { Layout } from "./componets/Layout";
 import { Account } from "./componets/Account";
 import { Login } from "./componets/Login/Index";
 import { AuthProvider } from "./context/AuthProvider";
+import { AdminProvider } from "./context/AdminProvider";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
+      <AdminProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+          </Routes>
 
-        <Routes>
-          <Route path="admin" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="detalle" element={<ListData />} />
-            <Route path="cuentas" element={<Account />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route path="admin" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="detalle" element={<ListData />} />
+              <Route path="cuentas" element={<Account />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AdminProvider>
     </AuthProvider>
   );
 }

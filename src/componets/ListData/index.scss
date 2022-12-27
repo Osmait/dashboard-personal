@@ -9,7 +9,7 @@
 
   top: 5%;
 
-  animation: fadeIn 0.5s forwards;
+  animation: fadeInDown 1s forwards;
 
   overflow-y: scroll;
 }
@@ -70,8 +70,9 @@ input {
   padding: 10px;
   flex-direction: row;
   gap: 50px;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  animation: fadeIn 1s forwards;
 }
 
 .cuentas-subtitulo {
