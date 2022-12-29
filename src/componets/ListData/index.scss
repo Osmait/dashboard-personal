@@ -1,3 +1,15 @@
+:root {
+  --azul: #3b82f6;
+  --blanco: #ffffff;
+  --gris-claro: #f5f5f5;
+  --gris: #94a3b8;
+  --gris-oscuro: #64748b;
+  --negro: #000;
+}
+.bill {
+  color: #ff0b00;
+}
+
 .container-cuentas {
   background-color: #181818;
   border-radius: 20px;
@@ -13,17 +25,32 @@
 
   overflow-y: scroll;
 }
+
+.container-cuentas::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+  opacity: 1;
+}
+
+.container-cuentas::-webkit-scrollbar-thumb {
+  background-color: #ffdd00;
+  border-radius: 10px;
+}
+
 .cuentas-nav {
   background-color: #181818;
   border-bottom: solid 1px;
   padding: 30px;
   margin-top: 30px;
   margin-left: 30px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   gap: 30px;
   position: -webkit-sticky; // required for Safari
   position: sticky;
+  z-index: 2;
+
   top: 0; // required as well.
 
   &_fechas {
@@ -55,24 +82,26 @@ input {
 .cuentas-listado {
   display: grid;
   justify-content: center;
+  margin: 0 auto;
   grid-template-columns: repeat(1, 1fr);
   align-items: center;
-
+  width: 50%;
   gap: 10px;
 }
+
 .cuenta-transaccion {
-  margin: 0 auto;
   display: flex;
-  width: 50%;
-  box-shadow: 0px 0px 5px 0.5px black;
+  width: 100%;
   border-radius: 10px;
-  border: none;
+  margin: 4px 3px;
+  box-shadow: 0px 0px 5px 0.5px black;
   padding: 10px;
   flex-direction: row;
   gap: 50px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   animation: fadeIn 1s forwards;
+  z-index: 1;
 }
 
 .cuentas-subtitulo {
@@ -83,7 +112,31 @@ input {
 .transaccion-description {
   font-size: 15px;
   text-align: justify;
+  word-break: break-all;
+  min-width: 150px;
+  max-width: 150px;
 }
 span {
   font-size: 30px;
+}
+
+/*** SWIPE LIST OVERRIDES **/
+.swipe-action__leading {
+  background-color: #ffdd00;
+  color: white;
+}
+
+.swipe-action__trailing {
+  background-color: #ff0b00;
+
+  color: var(--blanco);
+}
+
+.swipeable-list .swipe-action {
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.4rem;
+  text-align: right;
 }

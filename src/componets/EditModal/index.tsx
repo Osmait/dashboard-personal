@@ -2,9 +2,8 @@ import Modal from "@mui/material/Modal";
 import "./index.scss";
 import useAdmin from "../../hooks/useAdmin";
 import { AccountsInteface } from "../../Interfase/Accounts";
-import { useEffect, useState } from "react";
 
-export default function BasicModal() {
+export default function EditModal() {
   const {
     transactionName,
     transactionDescription,
@@ -16,30 +15,27 @@ export default function BasicModal() {
     setAmount,
     setTransactionType,
     setAccountModal,
-    open,
-    setOpen,
+    editopen,
+    setEditopen,
   } = useAdmin();
-  const handleOpen = () => {
-    setOpen(true);
-    setTransactionName("");
-    setTransactionDescription("");
-    setAmount(0);
-  };
-  const handleClose = () => setOpen(false);
-  const { accounts, postApiTransaction, setCambio, cambio } = useAdmin();
+
+  //   const handleOpen = () => setEditopen(true);
+  const handleClose = () => setEditopen(false);
+  const { accounts, id, setCambio, cambio, updateApiTransaction } = useAdmin();
 
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const transaccion = {
+    const newTransaction = {
       transaction_name: transactionName,
       transaction_description: transactionDescription,
       amount,
       type_transation: transactionType,
       account_id: accountModal,
     };
-    postApiTransaction(transaccion);
-    setOpen(false);
+    updateApiTransaction(newTransaction, id);
+
+    setEditopen(false);
     setTransactionName("");
     setTransactionDescription("");
     setAmount(0);
@@ -49,11 +45,8 @@ export default function BasicModal() {
 
   return (
     <div>
-      <button className="open-modal" onClick={handleOpen}>
-        Agregar
-      </button>
       <Modal
-        open={open}
+        open={editopen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -121,7 +114,7 @@ export default function BasicModal() {
               )}
             </select>
           </div>
-          <button type="submit"> Agregar</button>
+          <button type="submit"> Guardar Cambios</button>
         </form>
       </Modal>
     </div>

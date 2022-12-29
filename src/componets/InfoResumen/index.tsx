@@ -1,82 +1,53 @@
-import React from "react";
+import {
+  faMoneyBillTransfer,
+  faSackDollar,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import useAdmin from "../../hooks/useAdmin";
+import { TransactionInterface } from "../../Interfase/Transaction";
 import "./index.scss";
 
 export const InfoResumen = () => {
+  const { transaction } = useAdmin();
+
   return (
     <div>
       <table className="table">
         <thead>
           <tr>
-            <th>Ingreso</th>
+            <th>Transaccion</th>
             <th>Descripcion</th>
             <th>Monto</th>
             <th>Fecha</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Sueldo</td>
-            <td>Sueldo Mensual</td>
-            <td>15800</td>
-            <td>23/12/2022</td>
-          </tr>
-        </tbody>
+        {transaction ? (
+          transaction.map((tras: TransactionInterface) => (
+            <tbody key={tras.id}>
+              <tr>
+                <td>
+                  {tras.type_transation == "bill" ? (
+                    <FontAwesomeIcon
+                      icon={faMoneyBillTransfer}
+                      color={"#ff0b00"}
+                    />
+                  ) : (
+                    <FontAwesomeIcon icon={faSackDollar} color={"#0abf53"} />
+                  )}
+                  &nbsp; {tras.transaction_name}
+                </td>
+                <td>{tras.transaction_description}</td>
+                <td className={tras.type_transation == "bill" ? "bill" : ""}>
+                  $ {tras.type_transation == "bill" && "-"} {tras.amount}
+                </td>
+                <td>{tras.created_at.split("T")[0]}</td>
+              </tr>
+            </tbody>
+          ))
+        ) : (
+          <td>No hay datos</td>
+        )}
       </table>
     </div>
   );

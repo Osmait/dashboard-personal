@@ -5,6 +5,7 @@ import useAdmin from "../../hooks/useAdmin";
 import { AccountsInteface } from "../../Interfase/Accounts";
 import BasicModal from "../modal";
 import "./index.scss";
+import AccountModal from "./modalAccount";
 
 export const Account = () => {
   const { accounts } = useAdmin();
@@ -12,21 +13,25 @@ export const Account = () => {
   return (
     <div className="container-bank">
       <div>
-        <BasicModal />
+        <AccountModal />
       </div>
       <div className="titulo">
         <h1>Cuentas de Banco</h1>
       </div>
       <div className="lista-cuentas">
-        {accounts.map((account: AccountsInteface) => (
-          <div className="cuenta-banco">
-            <FontAwesomeIcon icon={faBank} size={"7x"} />
-            <div>
-              <h1>{account.bank}</h1>
-              <h2>balance: ${account.balance}</h2>
+        {accounts ? (
+          accounts.map((account: AccountsInteface) => (
+            <div key={account.id} className="cuenta-banco">
+              <FontAwesomeIcon icon={faBank} size={"7x"} />
+              <div>
+                <h1>{account.bank}</h1>
+                <h2>balance: ${account.balance}</h2>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <option>No hay datos</option>
+        )}
       </div>
     </div>
   );

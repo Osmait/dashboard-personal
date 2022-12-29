@@ -10,26 +10,72 @@ import { TransactionInterface } from "../../Interfase/Transaction";
 
 import BasicModal from "../modal";
 
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions,
+} from "react-swipeable-list";
+import "react-swipeable-list/dist/styles.css";
+
 import "./index.scss";
+import { useState } from "react";
+import EditModal from "../EditModal";
 
 export const ListData = () => {
-  const { accounts, handlerAccount, account, transaction } = useAdmin();
+  const {
+    accounts,
+    handlerAccount,
+    account,
+    transaction,
+    desde,
+    hasta,
+    setDesde,
+    setHasta,
+    deleteApiTrasaction,
+    handlerEdit,
+  } = useAdmin();
+
+  const leadingActions = (transaction: TransactionInterface) => (
+    <LeadingActions>
+      <SwipeAction onClick={() => handlerEdit(transaction)}>Editar</SwipeAction>
+    </LeadingActions>
+  );
+
+  const trailingActions = (id: string) => (
+    <TrailingActions>
+      <SwipeAction onClick={() => deleteApiTrasaction(id)} destructive={true}>
+        Eliminar
+      </SwipeAction>
+    </TrailingActions>
+  );
+
   return (
     <>
       <h1>Cuentas</h1>
       <div className="container-cuentas">
         <nav className="cuentas-nav">
           <BasicModal />
+          <EditModal />
           <div className="cuentas-buscardor">
             <label htmlFor="buscardor">Buscador:</label>
             <input id="buscardor" />
           </div>
           <div className="cuentas-nav_fechas">
             <label htmlFor="fecha1">Desde:</label>
-            <input type={"date"} />
+            <input
+              type={"date"}
+              value={desde}
+              onChange={(e) => setDesde(e.target.value)}
+            />
 
             <label htmlFor="fecha2">hasta:</label>
-            <input type={"date"} />
+            <input
+              type={"date"}
+              value={hasta}
+              onChange={(e) => setHasta(e.target.value)}
+            />
           </div>
           <div>
             <select
@@ -38,11 +84,15 @@ export const ListData = () => {
               className="select-cuenta"
             >
               <option value={"general"}>General</option>
-              {accounts.map((acc: AccountsInteface) => (
-                <option key={acc.id} value={acc.id}>
-                  {acc.bank}
-                </option>
-              ))}
+              {accounts ? (
+                accounts.map((acc: AccountsInteface) => (
+                  <option key={acc.id} value={acc.id}>
+                    {acc.bank}
+                  </option>
+                ))
+              ) : (
+                <option>No hay cuentas</option>
+              )}
             </select>
           </div>
         </nav>
@@ -58,33 +108,47 @@ export const ListData = () => {
         <div className="cuentas-listado">
           {transaction ? (
             transaction.map((tr: TransactionInterface) => (
-              <div key={tr.id} className="cuenta-transaccion">
-                {tr.type_transation === "bill" ? (
-                  <FontAwesomeIcon
-                    icon={faMoneyBillTransfer}
-                    size="5x"
-                    color={"#ff0b00"}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faSackDollar}
-                    size={"5x"}
-                    color={"#0abf53"}
-                  />
-                )}
+              <SwipeableList key={tr.id}>
+                <SwipeableListItem
+                  leadingActions={leadingActions(tr)}
+                  trailingActions={trailingActions(tr.id)}
+                >
+                  <div key={tr.id} className="cuenta-transaccion">
+                    {tr.type_transation === "bill" ? (
+                      <FontAwesomeIcon
+                        icon={faMoneyBillTransfer}
+                        size="5x"
+                        color={"#ff0b00"}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faSackDollar}
+                        size={"5x"}
+                        color={"#0abf53"}
+                      />
+                    )}
 
-                <h1>{tr.transaction_name}</h1>
-                <p className="transaccion-description">
-                  {tr.transaction_description}
-                </p>
-                <p>
-                  <span>${tr.amount}</span>
-                </p>
-                <p>{tr.created_at.split("T")[0]}</p>
-              </div>
+                    <h1>{tr.transaction_name}</h1>
+                    <p className="transaccion-description">
+                      {tr.transaction_description}
+                    </p>
+                    <p>
+                      <span
+                        className={tr.type_transation == "bill" ? "bill" : ""}
+                      >
+                        $ {tr.type_transation == "bill" && "-"}
+                        {tr.amount}
+                      </span>
+                    </p>
+                    <div className="text-container">
+                      <p>{tr.created_at.split("T")[0]}</p>
+                    </div>
+                  </div>
+                </SwipeableListItem>
+              </SwipeableList>
             ))
           ) : (
-            <h1 className="cuenta-transaccion">No hay gastos ...</h1>
+            <h1 className="cuenta-transaccion">No hay Movimientos ...</h1>
           )}
         </div>
       </div>

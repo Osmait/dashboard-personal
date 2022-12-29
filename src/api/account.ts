@@ -16,3 +16,20 @@ export const getAccounts = async (
 
   return data;
 };
+
+export const PotsAccounts = async (
+  token: string,
+  account: AccountsInteface
+): Promise<AccountsInteface> => {
+  const config = {
+    headers: {
+      "content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
+  const URL = `${import.meta.env.VITE_URL_API}account`;
+  const { data } = await axios.post(URL, account, config);
+
+  return data;
+};
