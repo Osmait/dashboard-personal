@@ -27,22 +27,23 @@ export const AdminProvider = ({ children }: Props) => {
   const [transaction, setTransaction] = useState<TransactionInterface[]>([]);
   const [cambio, setCambio] = useState<boolean>(false);
   const [id, setId] = useState<string>();
-
   const [transactionName, setTransactionName] = useState<string>("");
   const [transactionDescription, setTransactionDescription] =
     useState<string>("");
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<string>("");
   const [transactionType, setTransactionType] = useState<string>("");
   const [accountModal, setAccountModal] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [editopen, setEditopen] = useState(false);
   const date = new Date();
   const dia = date.getDate();
-  const mes = date.getMonth();
+  const mes = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  const [desde, setDesde] = useState<string>(`${year}-${mes + 1}-${dia}`);
-  const [hasta, setHasta] = useState<string>(`${year}-${mes + 1}-${dia + 1}`);
+  const [desde, setDesde] = useState<string>(`${year}-${mes}-${dia}`);
+  const [hasta, setHasta] = useState<string>(
+    `${year}-${dia === 30 ? mes + 1 : mes}-${dia === 30 ? 1 : dia + 2}`
+  );
 
   //   Accounts
   useEffect(() => {
@@ -88,8 +89,8 @@ export const AdminProvider = ({ children }: Props) => {
     if (!token) {
       return;
     }
-    const incomeReponse = await postTransaction(token, data);
-    setTransaction([incomeReponse, ...transaction]);
+    await postTransaction(token, data);
+
     setCambio(true);
   };
 
@@ -131,11 +132,13 @@ export const AdminProvider = ({ children }: Props) => {
   const handlerEdit = async (data: TransactionInterface) => {
     setTransactionName(data.transaction_name);
     setTransactionDescription(data.transaction_description);
-    setAmount(data.amount);
+    setAmount(data.amount.toString());
     setTransactionType(data.type_transation);
-    setAccountModal(data.accountId);
+    setAccountModal(data.account_id);
+
     setId(data.id);
     setEditopen(true);
+    console.log(data);
   };
 
   return (

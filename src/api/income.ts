@@ -33,6 +33,10 @@ export const postTransaction = async (
     },
   };
 
+  if (transation.type_transation === "bill") {
+    transation.amount = transation.amount * -1;
+  }
+
   const URL = `${import.meta.env.VITE_URL_API}transation`;
   const { data } = await axios.post(URL, transation, config);
 

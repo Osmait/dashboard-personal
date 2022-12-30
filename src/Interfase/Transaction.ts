@@ -4,6 +4,6 @@ export interface TransactionInterface {
   transaction_description: string;
   amount: number;
   type_transation: string;
-  accountId: string;
+  account_id: string;
   created_at: string;
 }

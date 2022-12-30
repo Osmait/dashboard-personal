@@ -23,7 +23,7 @@ export default function BasicModal() {
     setOpen(true);
     setTransactionName("");
     setTransactionDescription("");
-    setAmount(0);
+    setAmount("");
   };
   const handleClose = () => setOpen(false);
   const { accounts, postApiTransaction, setCambio, cambio } = useAdmin();
@@ -34,7 +34,7 @@ export default function BasicModal() {
     const transaccion = {
       transaction_name: transactionName,
       transaction_description: transactionDescription,
-      amount,
+      amount: parseFloat(amount),
       type_transation: transactionType,
       account_id: accountModal,
     };
@@ -42,7 +42,7 @@ export default function BasicModal() {
     setOpen(false);
     setTransactionName("");
     setTransactionDescription("");
-    setAmount(0);
+    setAmount("");
 
     setCambio(!cambio);
   };
@@ -81,9 +81,9 @@ export default function BasicModal() {
           <div>
             <label>Monto</label>
             <input
-              type={"number"}
+              type={"text"}
               value={amount}
-              onChange={(e) => setAmount(parseInt(e.target.value))}
+              onChange={(e) => setAmount(e.target.value)}
             />
           </div>
           <div>
@@ -93,7 +93,7 @@ export default function BasicModal() {
               value={transactionType}
               className="select-Modal"
             >
-              <option defaultValue={"type"} selected disabled hidden>
+              <option defaultValue={""} selected>
                 Tipo de transaccion
               </option>
               <option value={"bill"}>Gasto</option>
@@ -107,7 +107,7 @@ export default function BasicModal() {
               value={accountModal}
               className="select-Modal"
             >
-              <option defaultValue={"cuenta"} selected disabled hidden>
+              <option defaultValue={""} selected>
                 Cuentas
               </option>
               {accounts ? (

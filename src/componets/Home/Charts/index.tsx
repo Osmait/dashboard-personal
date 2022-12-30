@@ -9,6 +9,9 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+import { getTransaction } from "../../../api/income";
+import { useEffect, useState } from "react";
+import { TransactionInterface } from "../../../Interfase/Transaction";
 
 ChartJS.register(
   CategoryScale,
@@ -47,22 +50,59 @@ const labels = [
   "Diciembre",
 ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
-
 export function Charts() {
+  const [dataAnual, setDataAnual] = useState<TransactionInterface[]>([]);
+  const date = new Date();
+  const year = date.getFullYear();
+
+  const fechaInicio = `${year}-1-1`;
+  const fechaFinal = `${year}-12-31`;
+
+  useEffect(() => {
+    const Consulta = async () => {
+      const token = localStorage.getItem("Authorization");
+
+      if (!token) {
+        return;
+      }
+      const yearDAta = await getTransaction(
+        token,
+        "general",
+        fechaInicio,
+        fechaFinal
+      );
+      setDataAnual(yearDAta);
+    };
+    Consulta();
+  }, []);
+
+  const mesesIncome = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const mesesBill = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  for (let v of dataAnual) {
+    let index = parseInt(v.created_at.split("-")[1]);
+    if (v.type_transation === "income") {
+      mesesIncome[index - 1] += v.amount;
+    } else {
+      mesesBill[index - 1] += v.amount;
+    }
+  }
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: mesesBill,
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Dataset 2",
+        data: mesesIncome,
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+
   return <Bar options={options} data={data} />;
 }

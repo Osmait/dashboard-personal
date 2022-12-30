@@ -17,11 +17,15 @@ export default function EditModal() {
     setAccountModal,
     editopen,
     setEditopen,
+    accounts,
+    id,
+    setCambio,
+    cambio,
+    updateApiTransaction,
   } = useAdmin();
 
   //   const handleOpen = () => setEditopen(true);
   const handleClose = () => setEditopen(false);
-  const { accounts, id, setCambio, cambio, updateApiTransaction } = useAdmin();
 
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,9 +78,9 @@ export default function EditModal() {
           <div>
             <label>Monto</label>
             <input
-              type={"number"}
+              type={"text"}
               value={amount}
-              onChange={(e) => setAmount(parseInt(e.target.value))}
+              onChange={(e) => setAmount(e.target.value)}
             />
           </div>
           <div>
