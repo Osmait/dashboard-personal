@@ -8,12 +8,14 @@ import { getAccounts, PotsAccounts } from "../api/account";
 
 import {
   deleteTransation,
+  getBalance,
   getTransaction,
   postTransaction,
   updateTransaction,
 } from "../api/income";
 import EditModal from "../componets/EditModal";
 import { AccountsInteface } from "../Interfase/Accounts";
+import { BalanceIntefase } from "../Interfase/Balance";
 import { TransactionInterface } from "../Interfase/Transaction";
 
 type Props = {
@@ -35,15 +37,14 @@ export const AdminProvider = ({ children }: Props) => {
   const [accountModal, setAccountModal] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [editopen, setEditopen] = useState(false);
+  const [balance, setBalance] = useState<BalanceIntefase[]>([]);
   const date = new Date();
   const dia = date.getDate();
   const mes = date.getMonth() + 1;
   const year = date.getFullYear();
 
   const [desde, setDesde] = useState<string>(`${year}-${mes}-${dia}`);
-  const [hasta, setHasta] = useState<string>(
-    `${year}-${dia === 30 ? mes + 1 : mes}-${dia === 30 ? 1 : dia + 2}`
-  );
+  const [hasta, setHasta] = useState<string>(`${year}-${mes}-${dia + 1}`);
 
   //   Accounts
   useEffect(() => {
@@ -58,7 +59,7 @@ export const AdminProvider = ({ children }: Props) => {
       setAccounts(accountsReponse);
     };
     consultApiAccount();
-  }, []);
+  }, [, cambio]);
   const postApiAccount = async (data: AccountsInteface) => {
     const token = localStorage.getItem("Authorization");
 
@@ -67,6 +68,7 @@ export const AdminProvider = ({ children }: Props) => {
     }
     const accountResponse = await PotsAccounts(token, data);
     setAccounts([accountResponse, ...accounts]);
+    setCambio(!cambio);
   };
 
   //   Transaction
@@ -129,6 +131,20 @@ export const AdminProvider = ({ children }: Props) => {
     setTransaction(transactionUpdate);
   };
 
+  useEffect(() => {
+    const consultaApi = async () => {
+      const token = localStorage.getItem("Authorization");
+
+      if (!token) {
+        return;
+      }
+      const data = await getBalance(token);
+      console.log(data);
+      setBalance(data);
+    };
+    consultaApi();
+  }, [, account, cambio]);
+
   const handlerEdit = async (data: TransactionInterface) => {
     setTransactionName(data.transaction_name);
     setTransactionDescription(data.transaction_description);
@@ -174,6 +190,7 @@ export const AdminProvider = ({ children }: Props) => {
         setEditopen,
         updateApiTransaction,
         id,
+        balance,
       }}
     >
       {children}

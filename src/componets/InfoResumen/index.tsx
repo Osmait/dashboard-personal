@@ -39,7 +39,7 @@ export const InfoResumen = () => {
                 </td>
                 <td>{tras.transaction_description}</td>
                 <td className={tras.type_transation == "bill" ? "bill" : ""}>
-                  $ {tras.type_transation == "bill" && "-"} {tras.amount}
+                  $ {tras.amount}
                 </td>
                 <td>{tras.created_at.split("T")[0]}</td>
               </tr>

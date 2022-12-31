@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BalanceIntefase } from "../Interfase/Balance";
 import { TransactionInterface } from "../Interfase/Transaction";
 
 export const getTransaction = async (
@@ -74,6 +75,20 @@ export const deleteTransation = async (
 
   const URL = `${import.meta.env.VITE_URL_API}transation/${id}`;
   const { data } = await axios.delete(URL, config);
+
+  return data;
+};
+
+export const getBalance = async (token: string): Promise<BalanceIntefase[]> => {
+  const config = {
+    headers: {
+      "content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
+  const URL = `${import.meta.env.VITE_URL_API}balance`;
+  const { data } = await axios(URL, config);
 
   return data;
 };

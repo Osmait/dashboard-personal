@@ -22,6 +22,7 @@ import "react-swipeable-list/dist/styles.css";
 import "./index.scss";
 import { useState } from "react";
 import EditModal from "../EditModal";
+import { BalanceIntefase } from "../../Interfase/Balance";
 
 export const ListData = () => {
   const {
@@ -35,6 +36,7 @@ export const ListData = () => {
     setHasta,
     deleteApiTrasaction,
     handlerEdit,
+    balance,
   } = useAdmin();
 
   const leadingActions = (transaction: TransactionInterface) => (
@@ -50,10 +52,12 @@ export const ListData = () => {
       </SwipeAction>
     </TrailingActions>
   );
+  console.log(account);
 
   return (
     <>
       <h1>Cuentas</h1>
+
       <div className="container-cuentas">
         <nav className="cuentas-nav">
           <BasicModal />
@@ -102,7 +106,19 @@ export const ListData = () => {
             size={"5x"}
             color="#4d4d4de"
           />
-          <h1>Lista de datos</h1>
+          <div>
+            <h1>Lista de datos</h1>
+
+            <h1>
+              Balance:
+              {balance
+                ? balance.map(
+                    (bl: BalanceIntefase) =>
+                      bl.id === account && <span key={bl.id}> ${bl.total}</span>
+                  )
+                : 0}
+            </h1>
+          </div>
         </div>
 
         <div className="cuentas-listado">
@@ -136,8 +152,7 @@ export const ListData = () => {
                       <span
                         className={tr.type_transation == "bill" ? "bill" : ""}
                       >
-                        $ {tr.type_transation == "bill" && "-"}
-                        {tr.amount}
+                        ${tr.amount}
                       </span>
                     </p>
                     <div className="text-container">

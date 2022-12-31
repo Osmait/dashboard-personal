@@ -79,12 +79,14 @@ export function Charts() {
   const mesesIncome = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const mesesBill = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  for (let v of dataAnual) {
-    let index = parseInt(v.created_at.split("-")[1]);
-    if (v.type_transation === "income") {
-      mesesIncome[index - 1] += v.amount;
-    } else {
-      mesesBill[index - 1] += v.amount;
+  if (dataAnual) {
+    for (let v of dataAnual) {
+      let index = parseInt(v.created_at.split("-")[1]);
+      if (v.type_transation === "income") {
+        mesesIncome[index - 1] += v.amount;
+      } else {
+        mesesBill[index - 1] += Math.abs(v.amount);
+      }
     }
   }
 
@@ -92,17 +94,21 @@ export function Charts() {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: "Gastos",
         data: mesesBill,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Dataset 2",
+        label: "Ingresos",
         data: mesesIncome,
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  return dataAnual ? (
+    <Bar options={options} data={data} />
+  ) : (
+    <h1>No hay datos..</h1>
+  );
 }
