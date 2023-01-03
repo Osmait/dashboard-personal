@@ -39,12 +39,12 @@ export const AdminProvider = ({ children }: Props) => {
   const [editopen, setEditopen] = useState(false);
   const [balance, setBalance] = useState<BalanceIntefase[]>([]);
   const date = new Date();
-  const dia = date.getDate();
+  const dia = date.getUTCDate();
   const mes = date.getMonth() + 1;
   const year = date.getFullYear();
 
   const [desde, setDesde] = useState<string>(`${year}-${mes}-${dia}`);
-  const [hasta, setHasta] = useState<string>(`${year}-${mes}-${dia + 1}`);
+  const [hasta, setHasta] = useState<string>(`${year}-${mes}-${dia}`);
 
   //   Accounts
   useEffect(() => {
@@ -191,6 +191,7 @@ export const AdminProvider = ({ children }: Props) => {
         updateApiTransaction,
         id,
         balance,
+        setBalance,
       }}
     >
       {children}

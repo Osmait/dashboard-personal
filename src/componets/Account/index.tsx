@@ -25,7 +25,7 @@ export const Account = () => {
               <FontAwesomeIcon icon={faBank} size={"7x"} />
               <div>
                 <h1>{account.bank}</h1>
-                <h2>balance: ${account.balance}</h2>
+                <h2>balance Inicial: ${account.balance}</h2>
               </div>
             </div>
           ))

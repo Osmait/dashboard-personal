@@ -20,7 +20,7 @@ import {
 import "react-swipeable-list/dist/styles.css";
 
 import "./index.scss";
-import { useState } from "react";
+
 import EditModal from "../EditModal";
 import { BalanceIntefase } from "../../Interfase/Balance";
 
@@ -52,7 +52,6 @@ export const ListData = () => {
       </SwipeAction>
     </TrailingActions>
   );
-  console.log(account);
 
   return (
     <>
@@ -111,12 +110,22 @@ export const ListData = () => {
 
             <h1>
               Balance:
-              {balance
-                ? balance.map(
-                    (bl: BalanceIntefase) =>
-                      bl.id === account && <span key={bl.id}> ${bl.total}</span>
-                  )
-                : 0}
+              {account == "general" ? (
+                <span>
+                  $
+                  {balance.reduce(
+                    (b: number, a: BalanceIntefase) => b + a.total,
+                    0
+                  )}
+                </span>
+              ) : balance ? (
+                balance.map(
+                  (bl: BalanceIntefase) =>
+                    bl.id === account && <span key={bl.id}> ${bl.total}</span>
+                )
+              ) : (
+                0
+              )}
             </h1>
           </div>
         </div>
