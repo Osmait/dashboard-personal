@@ -1,10 +1,11 @@
+import moment from "moment";
 import React, {
   createContext,
   ReactHTMLElement,
   useEffect,
   useState,
 } from "react";
-import { getAccounts, PotsAccounts } from "../api/account";
+import { deleteAccount, getAccounts, PotsAccounts } from "../api/account";
 
 import {
   deleteTransation,
@@ -38,13 +39,14 @@ export const AdminProvider = ({ children }: Props) => {
   const [open, setOpen] = useState(false);
   const [editopen, setEditopen] = useState(false);
   const [balance, setBalance] = useState<BalanceIntefase[]>([]);
-  const date = new Date();
-  const dia = date.getUTCDate();
-  const mes = date.getMonth() + 1;
-  const year = date.getFullYear();
+  
+  const dateMoment =moment().format("YYYY-MM-DD")
+  const dateHasta =moment().add(1,"day").format("YYYY-MM-DD")
 
-  const [desde, setDesde] = useState<string>(`${year}-${mes}-${dia}`);
-  const [hasta, setHasta] = useState<string>(`${year}-${mes}-${dia}`);
+  
+
+  const [desde, setDesde] = useState<string>(dateMoment);
+  const [hasta, setHasta] = useState<string>(dateHasta);
 
   //   Accounts
   useEffect(() => {
@@ -67,10 +69,26 @@ export const AdminProvider = ({ children }: Props) => {
       return;
     }
     const accountResponse = await PotsAccounts(token, data);
+    if(!accounts){
+      setAccounts([accountResponse])
+      return
+    }
     setAccounts([accountResponse, ...accounts]);
     setCambio(!cambio);
   };
 
+  const deleteAccountApi = async(id:string)=>{
+
+    const token = localStorage.getItem("Authorization");
+
+      if (!token) {
+        return;
+      }
+    await deleteAccount(token, id)
+    const actualAccount = accounts.filter((acc:AccountsInteface)=> acc.id != id)
+    setAccounts(actualAccount)
+  }
+ 
   //   Transaction
   useEffect(() => {
     const consultApiTransaction = async () => {
@@ -91,9 +109,13 @@ export const AdminProvider = ({ children }: Props) => {
     if (!token) {
       return;
     }
-    await postTransaction(token, data);
-
-    setCambio(true);
+    const dataResponse =await postTransaction(token, data);
+    if(!transaction){
+      setTransaction([dataResponse])
+      return
+    }
+    setTransaction([dataResponse,...transaction])
+    setCambio(!cambio);
   };
 
   const deleteApiTrasaction = async (id: string) => {
@@ -139,7 +161,7 @@ export const AdminProvider = ({ children }: Props) => {
         return;
       }
       const data = await getBalance(token);
-      console.log(data);
+      
       setBalance(data);
     };
     consultaApi();
@@ -192,7 +214,9 @@ export const AdminProvider = ({ children }: Props) => {
         id,
         balance,
         setBalance,
+        deleteAccountApi
       }}
+
     >
       {children}
     </AdminContext.Provider>

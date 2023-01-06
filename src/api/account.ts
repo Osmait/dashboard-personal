@@ -33,3 +33,20 @@ export const PotsAccounts = async (
 
   return data;
 };
+
+export const deleteAccount = async (
+  token: string,
+  id:string
+): Promise<AccountsInteface[]> => {
+  const config = {
+    headers: {
+      "content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
+  const URL = `${import.meta.env.VITE_URL_API}account/${id}`;
+  const { data } = await axios.delete(URL, config);
+
+  return data;
+};

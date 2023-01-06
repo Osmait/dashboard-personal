@@ -111,9 +111,9 @@ export const ListData = () => {
             <h1>
               Balance:
               {account == "general" ? (
-                <span>
+                <span className="list_balance">
                   $
-                  {balance.reduce(
+                  {balance && balance.reduce(
                     (b: number, a: BalanceIntefase) => b + a.total,
                     0
                   )}
@@ -121,7 +121,7 @@ export const ListData = () => {
               ) : balance ? (
                 balance.map(
                   (bl: BalanceIntefase) =>
-                    bl.id === account && <span key={bl.id}> ${bl.total}</span>
+                    bl.id === account && <span className="list_balance" key={bl.id}> ${bl.total}</span>
                 )
               ) : (
                 0

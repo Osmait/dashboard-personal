@@ -8,7 +8,7 @@ import "./index.scss";
 import AccountModal from "./modalAccount";
 
 export const Account = () => {
-  const { accounts } = useAdmin();
+  const { accounts,deleteAccountApi } = useAdmin();
 
   return (
     <div className="container-bank">
@@ -26,6 +26,7 @@ export const Account = () => {
               <div>
                 <h1>{account.bank}</h1>
                 <h2>balance Inicial: ${account.balance}</h2>
+                <button onClick={()=> deleteAccountApi(account.id)}>Eliminar</button>
               </div>
             </div>
           ))
