@@ -1,0 +1,48 @@
+.formulario {
+  opacity: 0.9;
+  border-radius: 20px;
+  display: grid;
+  margin-left: 50px;
+  gap: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  max-width: 500px;
+  transform: translate(-50%, -50%);
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #181818;
+}
+
+label {
+  margin-left: 20px;
+  display: block;
+}
+textarea {
+  margin-left: 20px;
+}
+button {
+  font-weight: bold;
+  padding: 15px 10px;
+  border-radius: 10px;
+  border: solid 1px;
+  background-color: #ffd700;
+}
+.open-modal {
+  font-weight: bold;
+  padding: 15px 10px;
+  border-radius: 10px;
+  border: solid 1px;
+  background-color: #ffd700;
+  margin-left: 30px;
+}
+
+.select-Modal {
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  margin-left: 20px;
+}

@@ -1,0 +1,14 @@
+.table {
+  width: 100%;
+  text-align: start;
+  animation: fadeInDown 1s forwards;
+
+  & th {
+    font-size: 20px;
+    text-align: start;
+  }
+  & td {
+    font-size: 15px;
+    animation: fadeInDown 1s forwards;
+  }
+}
