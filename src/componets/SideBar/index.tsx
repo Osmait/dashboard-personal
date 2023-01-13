@@ -1,9 +1,8 @@
 import {
-  faBank,
-  faEnvelope,
+  
   faFileInvoiceDollar,
   faHome,
-  faMoneyBills,
+ 
   faMoneyCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,22 +14,46 @@ export const SideBar = () => {
   return (
     <div className="nav-bar">
       <nav>
-        <NavLink exact="true" activeclassname="active" to={"/admin"}>
+        <NavLink className={({ isActive }) =>
+            [
+              "link_nav",
+              isActive ? "active" : null,
+            ]
+              .filter(Boolean)
+              .join(" ")
+          }
+          end // <-- prevents matching on sub-routes, similar to exact
+          to="/admin"
+        >
           <FontAwesomeIcon icon={faHome} color="#4d4d4de" />
         </NavLink>
         <NavLink
-          exact={"true"}
-          activeclassname="active"
-          className={"about-link"}
+          className={({ isActive }) =>
+          [
+            "link_nav about-link",
+            isActive ? "active about-link" : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }
+        end
+          
           to={"detalle"}
         >
           <FontAwesomeIcon icon={faFileInvoiceDollar} color="#4d4d4de" />
         </NavLink>
 
         <NavLink
-          exact={"true"}
-          activeclassname="active"
-          className={"cuentas"}
+         className={({ isActive }) =>
+         [
+           "link_nav cuentas",
+           isActive ? "active cuentas" : null,
+         ]
+           .filter(Boolean)
+           .join(" ")
+       }
+       end
+          
           to={"cuentas"}
         >
           <FontAwesomeIcon icon={faMoneyCheck} color="#4d4d4de" />

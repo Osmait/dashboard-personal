@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, {
   createContext,
-  ReactHTMLElement,
+ 
   useEffect,
   useState,
 } from "react";
@@ -14,7 +14,7 @@ import {
   postTransaction,
   updateTransaction,
 } from "../api/income";
-import EditModal from "../componets/EditModal";
+
 import { AccountsInteface } from "../Interfase/Accounts";
 import { BalanceIntefase } from "../Interfase/Balance";
 import { TransactionInterface } from "../Interfase/Transaction";
