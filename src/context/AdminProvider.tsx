@@ -61,7 +61,7 @@ export const AdminProvider = ({ children }: Props) => {
       setAccounts(accountsReponse);
     };
     consultApiAccount();
-  }, [, cambio]);
+  }, [cambio]);
   const postApiAccount = async (data: AccountsInteface) => {
     const token = localStorage.getItem("Authorization");
 
@@ -101,7 +101,7 @@ export const AdminProvider = ({ children }: Props) => {
       setTransaction(incomeReponse);
     };
     consultApiTransaction();
-  }, [, account, desde, hasta, cambio, cambio]);
+  }, [account, desde, hasta, cambio, cambio]);
 
   const postApiTransaction = async (data: TransactionInterface) => {
     const token = localStorage.getItem("Authorization");
@@ -165,7 +165,7 @@ export const AdminProvider = ({ children }: Props) => {
       setBalance(data);
     };
     consultaApi();
-  }, [, account, cambio]);
+  }, [ ,account, cambio]);
 
   const handlerEdit = async (data: TransactionInterface) => {
     setTransactionName(data.transaction_name);

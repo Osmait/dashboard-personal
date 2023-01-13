@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api/user";
+import useAdmin from "../../hooks/useAdmin";
 import useAuth from "../../hooks/useAuth";
 import { AlertaInterface } from "../../Interfase/alerta";
 import { LoginUser } from "../../Interfase/User";
@@ -12,6 +13,9 @@ export const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [alerta, setAlerta] = useState<AlertaInterface>();
   const { cargando, setCargando, setAuth } = useAuth();
+
+  const {setCambio,cambio } = useAdmin();
+
 
   const navigate = useNavigate();
 
@@ -36,6 +40,7 @@ export const Login = () => {
       localStorage.setItem("Authorization", token);
       setAuth(user);
       navigate("/admin");
+      setCambio(!cambio)
       setCargando(false);
     } catch (error) {
       console.log(error);
