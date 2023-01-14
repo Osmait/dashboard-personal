@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 export const SideBar = () => {
   return (
     <div className="nav-bar">
-      <nav>
+      <nav className="nav-bar-bar">
         <NavLink className={({ isActive }) =>
             [
               "link_nav",

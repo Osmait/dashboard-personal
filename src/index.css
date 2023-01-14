@@ -1,5 +1,15 @@
 html {
   font-size: 62.5%;
+  height: 100%;
+  width: 100%;
+}
+.App{
+  min-height: 700px;
+}
+@media (min-width: 968px) {
+.App{
+  min-height: 900px;
+}
 }
 
 body {
@@ -13,12 +23,15 @@ body {
   display: block;
 }
 
-.dashboard {
-  margin-top: 200px;
-  margin-left: 200px;
-}
+
+
+
 
 @media screen and (max-width: 1200px) {
+  .dashboard {
+    margin-top: 200px;
+    margin-left: 200px;
+  }
   body {
     overflow: visible;
   }
