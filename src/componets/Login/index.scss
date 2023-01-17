@@ -1,22 +1,28 @@
-.container-login {
-  background-color: #181818;
-  border-radius: 20px;
-  width: 90%;
-  margin-left: 50px;
-  display: flex;
 
-  justify-content: center;
-  height: 90%;
-  overflow: hidden;
-  position: absolute;
+@media (min-width: 968px) {
+  .container-login {
+    background-color: #181818;
+    border-radius: 20px;
+    width: 90%;
+    margin-left: 50px;
+    display: flex;
+  
+    justify-content: center;
+    height: 90%;
+    overflow: hidden;
+    position: absolute;
+  
+    top: 5%;
+  
+    animation: fadeIn 0.5s forwards;
+  }
+  .formulario-login {
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+    height: 200px;
+  }
+  
 
-  top: 5%;
-
-  animation: fadeIn 0.5s forwards;
 }
-.formulario-login {
-  justify-content: center;
-  align-items: center;
-  margin-top: 20%;
-  height: 200px;
-}
+

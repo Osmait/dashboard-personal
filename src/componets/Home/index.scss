@@ -1,43 +1,74 @@
-.home {
-  //   justify-content: center;
-
+.home{
   &-chart {
-    height: 400px;
+    height: 195px;
     width: 100%;
-    display: flex;
-    justify-content: center;
     animation: zoomIn 1s forwards;
+    
+   
   }
-  &-resumen {
-    text-align: center;
+  &-resumen{
+  
+   text-align: center;
   }
-  &-info {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    margin-left: 300px;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+}
 
-    &_values {
-      height: 315px;
-      overflow: hidden;
 
+
+
+
+
+@media (min-width: 968px) {
+  .home {
+  
+
+    &-chart {
+      height: 400px;
       width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    &-resumen {
+      text-align: center;
+    }
+    &-info {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      // margin-left: 300px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+  
+      &_values {
+        height: 315px;
+        overflow: hidden;
+        margin-top: 30px;
+        width: 100%;
+       margin-left: 40px;
+      }
     }
   }
-}
-.select-container {
-  position: absolute;
-  left: -9px;
-  top: 1px;
+  .select-container {
+    position: absolute;
+    top: 1px;
+    
+    select{
+      
+      left: -15px;
+    }
+  }
+  
+  .select-home {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  .home-title-transaction {
+    margin: 0 auto;
+    // text-align: left;
+    
+  }
+  
+
 }
 
-.select-home {
-  width: 200px;
-  height: 30px;
-  border-radius: 5px;
-}
-.home-title-transaction {
-  margin-right: 300px;
-}
+

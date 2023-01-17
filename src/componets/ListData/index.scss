@@ -6,87 +6,32 @@
   --gris-oscuro: #64748b;
   --negro: #000;
 }
-.bill {
-  color: #ff0b00;
+
+.nav-conteiner{
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  
+}
+label{
+  margin-top: 10px;
 }
 
-.container-cuentas {
+
+.container-cuentas{
   background-color: #181818;
   border-radius: 20px;
-  width: 90%;
+  width: 100%;
+  min-height: 700px;
+  height: 100%;
 
-  height: 90%;
+  display: block;
 
-  position: absolute;
 
-  top: 5%;
 
   animation: fadeInDown 1s forwards;
 
   overflow-y: scroll;
-}
-
-.container-cuentas::-webkit-scrollbar {
-  width: 5px;
-  height: 4px;
-  opacity: 1;
-}
-
-.container-cuentas::-webkit-scrollbar-thumb {
-  background-color: #ffdd00;
-  border-radius: 10px;
-}
-
-.cuentas-nav {
-  background-color: #181818;
-  border-bottom: solid 1px;
-  padding: 30px;
-  margin-top: 30px;
-  margin-left: 30px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  position: -webkit-sticky; // required for Safari
-  position: sticky;
-  z-index: 2;
-
-  top: 0; // required as well.
-
-  &_fechas {
-    display: flex;
-    gap: 10px;
-  }
-}
-label {
-  font-size: 20px;
-}
-input {
-  margin-left: 20px;
-  margin-right: 20px;
-  width: 200px;
-  height: 30px;
-  border-radius: 5px;
-  border-style: none;
-}
-
-.cuentas-buscardor {
-  display: flex;
-}
-.select-cuenta {
-  width: 200px;
-  height: 30px;
-  border-radius: 5px;
-}
-
-.cuentas-listado {
-  display: grid;
-  justify-content: center;
-  margin: 0 auto;
-  grid-template-columns: repeat(1, 1fr);
-  align-items: center;
-  width: 50%;
-  gap: 10px;
 }
 
 .cuenta-transaccion {
@@ -97,57 +42,167 @@ input {
   box-shadow: 0px 0px 5px 0.5px black;
   padding: 10px;
   flex-direction: row;
-  gap: 50px;
+  gap: 30px;
   justify-content: space-between;
   align-items: center;
   animation: fadeIn 1s forwards;
   z-index: 1;
 }
-
-.cuentas-subtitulo {
-  display: flex;
-  gap: 30px;
-  margin: 20px 30px;
+.select-cuenta {
+  
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
-.transaccion-description {
-  font-size: 15px;
-  text-align: justify;
-  word-break: break-all;
-  min-width: 150px;
-  max-width: 150px;
-}
-span {
-  font-size: 30px;
-}
-
-
-
-/*** SWIPE LIST OVERRIDES **/
-.swipe-action__leading {
-  background-color: #ffdd00;
-  color: white;
+input {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  border-style: none;
 }
 
-.swipe-action__trailing {
-  background-color: #ff0b00;
 
-  color: var(--blanco);
+
+
+
+
+
+
+@media (min-width: 968px) {
+  .bill {
+    color: #ff0b00;
+  }
+  
+  .container-cuentas {
+    background-color: #181818;
+    border-radius: 20px;
+    width: 90%;
+  
+    height: 90%;
+  
+    position: absolute;
+  
+    top: 5%;
+  
+    animation: fadeInDown 1s forwards;
+  
+    overflow-y: scroll;
+  }
+  
+  .container-cuentas::-webkit-scrollbar {
+    width: 5px;
+    height: 4px;
+    opacity: 1;
+  }
+  
+  .container-cuentas::-webkit-scrollbar-thumb {
+    background-color: #ffdd00;
+    border-radius: 10px;
+  }
+  
+  .cuentas-nav {
+    background-color: #181818;
+    border-bottom: solid 1px;
+    padding: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    position: -webkit-sticky; // required for Safari
+    position: sticky;
+    z-index: 2;
+  
+    top: 0; // required as well.
+  
+    &_fechas {
+      display: flex;
+      gap: 10px;
+    }
+  }
+  label {
+    font-size: 20px;
+  }
+  input {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+  }
+  
+  .cuentas-buscardor {
+    display: flex;
+  }
+
+  
+  .cuentas-listado {
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+    width: 50%;
+    gap: 10px;
+  }
+  
+  .cuenta-transaccion {
+   
+    gap: 50px;
+  
+  }
+  
+  .cuentas-subtitulo {
+    display: flex;
+    gap: 30px;
+    margin: 20px 30px;
+  }
+  .transaccion-description {
+    font-size: 15px;
+    text-align: justify;
+    word-break: break-all;
+    min-width: 150px;
+    max-width: 150px;
+  }
+  span {
+    font-size: 30px;
+  }
+  
+  
+  
+  
+  .balance {
+    text-align: center;
+    display: block;
+  }
+  
+
 }
 
-.swipeable-list .swipe-action {
-  display: flex;
-  height: 100px;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.4rem;
-  text-align: right;
-}
+  /*** SWIPE LIST OVERRIDES **/
+  .swipe-action__leading {
+    background-color: #ffdd00;
+    color: white;
+  }
+  
+  .swipe-action__trailing {
+    background-color: #ff0b00;
+  
+    color: var(--blanco);
+  }
+  
+  .swipeable-list .swipe-action {
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    text-align: right;
+  }
+  
 
-// .list_balance{
-//   animation: fadeInDown 2s forwards;
-
-// }
-.balance {
-  text-align: center;
-  display: block;
-}

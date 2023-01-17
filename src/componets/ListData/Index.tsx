@@ -58,9 +58,11 @@ export const ListData = () => {
       <h1>Cuentas</h1>
 
       <div className="container-cuentas">
-        <nav className="cuentas-nav">
           <BasicModal />
           <EditModal />
+         
+        <nav className="cuentas-nav">
+
           <div className="cuentas-buscardor">
             <label htmlFor="buscardor">Buscador:</label>
             <input id="buscardor" />
@@ -81,11 +83,12 @@ export const ListData = () => {
             />
           </div>
           <div>
+            <label>Cuentas</label>
             <select
               onChange={handlerAccount}
               value={account}
               className="select-cuenta"
-            >
+              >
               <option value={"general"}>General</option>
               {accounts ? (
                 accounts.map((acc: AccountsInteface) => (
@@ -93,12 +96,13 @@ export const ListData = () => {
                     {acc.bank}
                   </option>
                 ))
-              ) : (
-                <option>No hay cuentas</option>
-              )}
+                ) : (
+                  <option>No hay cuentas</option>
+                  )}
             </select>
           </div>
         </nav>
+          
         <div className="cuentas-subtitulo">
           <FontAwesomeIcon
             icon={faFileInvoiceDollar}
