@@ -1,3 +1,25 @@
+.container-bank{
+  margin-top: 20px;
+  background-color: #181818;
+  border-radius: 20px;
+  width: 100%;
+  min-height: 700px;
+  height: 100%;
+
+  display: block;
+
+  // top: 5%;
+
+  animation: fadeInDown 1s forwards;
+
+  overflow-y: scroll;
+}
+
+
+
+
+
+
 @media (min-width: 768px) {
   .container-bank {
     background-color: #181818;

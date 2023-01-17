@@ -7,21 +7,64 @@
   --negro: #000;
 }
 
+.nav-conteiner{
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  
+}
+label{
+  margin-top: 10px;
+}
+
+
 .container-cuentas{
   background-color: #181818;
   border-radius: 20px;
-  width: 90%;
-
-  height: 90%;
+  width: 100%;
+  min-height: 700px;
+  height: 100%;
 
   display: block;
 
-  // top: 5%;
+
 
   animation: fadeInDown 1s forwards;
 
   overflow-y: scroll;
 }
+
+.cuenta-transaccion {
+  display: flex;
+  width: 100%;
+  border-radius: 10px;
+  margin: 4px 3px;
+  box-shadow: 0px 0px 5px 0.5px black;
+  padding: 10px;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 1s forwards;
+  z-index: 1;
+}
+.select-cuenta {
+  
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+input {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  border-style: none;
+}
+
+
 
 
 
@@ -96,11 +139,7 @@
   .cuentas-buscardor {
     display: flex;
   }
-  .select-cuenta {
-    width: 200px;
-    height: 30px;
-    border-radius: 5px;
-  }
+
   
   .cuentas-listado {
     display: grid;
@@ -113,18 +152,9 @@
   }
   
   .cuenta-transaccion {
-    display: flex;
-    width: 100%;
-    border-radius: 10px;
-    margin: 4px 3px;
-    box-shadow: 0px 0px 5px 0.5px black;
-    padding: 10px;
-    flex-direction: row;
+   
     gap: 50px;
-    justify-content: space-between;
-    align-items: center;
-    animation: fadeIn 1s forwards;
-    z-index: 1;
+  
   }
   
   .cuentas-subtitulo {
