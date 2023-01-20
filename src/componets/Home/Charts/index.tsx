@@ -76,8 +76,8 @@ export function Charts() {
     Consulta();
   }, []);
 
-  const mesesIncome = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  const mesesBill = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const mesesIncome = Array(12).fill(0)
+  const mesesBill = Array(12).fill(0)
 
   if (dataAnual) {
     for (let v of dataAnual) {
