@@ -64,6 +64,12 @@ input {
   border-style: none;
 }
 
+.container-modal{
+  margin-top: 5px;
+  margin-left: -300px;
+  margin-bottom: -25px;
+}
+
 
 
 
@@ -72,6 +78,9 @@ input {
 
 
 @media (min-width: 968px) {
+
+  
+  
   .bill {
     color: #ff0b00;
   }
@@ -180,6 +189,9 @@ input {
     text-align: center;
     display: block;
   }
+
+ 
+  
   
 
 }

@@ -7,6 +7,7 @@ import { Account } from "./componets/Account";
 import { Login } from "./componets/Login/Index";
 import { AuthProvider } from "./context/AuthProvider";
 import { AdminProvider } from "./context/AdminProvider";
+import { Registro } from "./componets/registro";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <AdminProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/confirmar"/>
+            <Route path="/registro" element={<Registro/>}/>
             <Route path="/" element={<Login />} />
           </Routes>
 

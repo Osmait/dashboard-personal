@@ -41,7 +41,7 @@ export const AdminProvider = ({ children }: Props) => {
   const [balance, setBalance] = useState<BalanceIntefase[]>([]);
   
   const dateMoment =moment().format("YYYY-MM-DD")
-  const dateHasta =moment().add(1,"day").format("YYYY-MM-DD")
+  const dateHasta =moment().add(1,"month").format("YYYY-MM-DD")
 
   
 
@@ -86,6 +86,7 @@ export const AdminProvider = ({ children }: Props) => {
       }
     await deleteAccount(token, id)
     const actualAccount = accounts.filter((acc:AccountsInteface)=> acc.id != id)
+      
     setAccounts(actualAccount)
   }
  

@@ -55,11 +55,18 @@ export const ListData = () => {
 
   return (
     <>
+    <div className="container-modal">
+      <BasicModal />
+      <EditModal />
+
+    </div>
+    
+    <div>
       <h1>Cuentas</h1>
 
+    </div>
+
       <div className="container-cuentas">
-          <BasicModal />
-          <EditModal />
          
         <nav className="cuentas-nav">
 
@@ -176,7 +183,7 @@ export const ListData = () => {
               </SwipeableList>
             ))
           ) : (
-            <h1 className="cuenta-transaccion">No hay Movimientos ...</h1>
+            <h1 className="cuenta-transaccion">No hay Movimientos...</h1>
           )}
         </div>
       </div>
